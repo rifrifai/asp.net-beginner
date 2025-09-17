@@ -42,6 +42,8 @@ app.MapPost("games", (CreateGameDto newGame) =>
 
 // UPDATE games/{id}
 
+// PATCH games/{id}
+
 // DELETE games/{id}
 
 app.Run();
