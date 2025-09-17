@@ -40,4 +40,6 @@ app.MapPost("games", (CreateGameDto newGame) =>
     return Results.CreatedAtRoute(GetGameEndpointName, new { id = game.Id }, game);
 });
 
+// UPDATE games/{id}
+
 app.Run();
