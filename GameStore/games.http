@@ -1,7 +1,15 @@
 GET http://localhost:5185/games
 
 ###
-GET http://localhost:5185/games/5
+GET http://localhost:5185/games/11
 
 ###
 POST http://localhost:5185/games
+Content-Type: application/json
+
+{
+    "name": "Iron Legacy",
+    "genre": "Action",
+    "price": 360000,
+    "releaseDate" : "2018-04-12"
+}
