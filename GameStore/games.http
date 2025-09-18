@@ -1,7 +1,10 @@
 GET http://localhost:5185/games
 
 ###
-GET http://localhost:5185/games/11
+GET http://localhost:5185/games/1
+
+###
+GET http://localhost:5185/games/100
 
 ###
 POST http://localhost:5185/games
@@ -24,6 +27,20 @@ Content-Type: application/json
     "price": 149000,
     "releaseDate": "2017-03-06"
 }
+
+###
+PUT http://localhost:5185/games/100
+Content-Type: application/json
+
+{
+    "name": "The Silent Code II",
+    "genre": "Strategy",
+    "price": 149000,
+    "releaseDate": "2017-03-06"
+}
+
+###
+DELETE  http://localhost:5185/games/1
 
 ###
 DELETE  http://localhost:5185/games/1
