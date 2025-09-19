@@ -3,6 +3,10 @@
 ##
 ## Get latest from `dotnet new gitignore`
 
+# database files
+**/*.db
+**/*.db-shm
+
 # dotenv files
 .env
 
