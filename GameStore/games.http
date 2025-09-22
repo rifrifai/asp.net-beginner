@@ -11,10 +11,10 @@ POST http://localhost:5185/games
 Content-Type: application/json
 
 {
-    "name": "Dragon Questors",
-    "genreId": 2,
-    "price": 420000,
-    "releaseDate" : "2024-03-30"
+    "name": "Soccer Stars 2025",
+    "genreId": 3,
+    "price": 255300,
+    "releaseDate" : "2023-09-17"
 }
 
 ###
