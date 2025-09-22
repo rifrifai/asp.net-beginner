@@ -1,7 +1,7 @@
 GET http://localhost:5185/games
 
 ###
-GET http://localhost:5185/games/1
+GET http://localhost:5185/games/2
 
 ###
 GET http://localhost:5185/games/100
@@ -11,10 +11,10 @@ POST http://localhost:5185/games
 Content-Type: application/json
 
 {
-    "name": "Iron Legacy",
-    "genre": "Action",
-    "price": 360000,
-    "releaseDate" : "2018-04-12"
+    "name": "Dragon Questors",
+    "genreId": 2,
+    "price": 420000,
+    "releaseDate" : "2024-03-30"
 }
 
 ###

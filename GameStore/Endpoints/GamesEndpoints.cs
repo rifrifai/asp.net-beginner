@@ -1,5 +1,7 @@
 using System;
+using GameStore.Data;
 using GameStore.DTOs;
+using GameStore.Entities;
 
 namespace GameStore.Endpoints;
 
@@ -8,16 +10,16 @@ public static class GameEndpoint
     const string GetGameEndpointName = "GetGame";
 
     private static readonly List<GameDto> _games = [
-        new (1, "The Silent Code", "Strategy", 150_000M, new DateOnly (2017, 3, 6)),
-        new (2, "Echoes of Tomorrow", "Action", 325_000M, new DateOnly(2019, 6, 25)),
-        new (3, "Crimson Horizon", "Adventure", 180_000M, new DateOnly(2021, 2, 27)),
-        new (4, "Digital Dreams", "Simulation", 250_000M, new DateOnly(2023, 1, 15)),
-        new (5, "Shadows of Reality", "Horror", 199_000M, new DateOnly(2016, 3, 15)),
-        new (6, "Neon Pulse", "Shooter", 275_000M, new DateOnly(2018, 9, 20)),
-        new (7, "Forgotten Paths", "RPG", 420_000M, new DateOnly(2020, 12, 8)),
-        new (8, "Virtual Dawn", "Puzzle", 135_000M, new DateOnly(2022, 7, 30)),
-        new (9, "Quantum Echo", "Adventure", 299_000M, new DateOnly(2015, 11, 3)),
-        new (10, "Mystic Framework", "Simulation", 480_000M, new DateOnly(2024, 5, 19))
+        // new(1, "Battle Arena X", "Fighting", 142_000, new DateOnly(2018,01,18)),
+        // new(2, "Fist of Fury", "Fighting", 170_000, new DateOnly(2016, 08,16)),
+        // new (3, "Dragon Questors", "Role-Playing", 423_528M, new DateOnly(2024, 3, 30)),
+        // new (4, "Mystic Journey", "Role-Playing", 103_085M, new DateOnly(2022, 6, 24)),
+        // new (5, "Soccer Stars 2025", "Sports", 255_300M, new DateOnly(2023, 9, 17)),
+        // new (6, "Basketball Pro League", "Sports", 312_900M, new DateOnly(2020, 4, 2)),
+        // new (7, "Speed Horizon", "Racing", 289_500M, new DateOnly(2016, 2, 20)),
+        // new (8, "Turbo Drift", "Racing", 345_600M, new DateOnly(2018, 5, 15)),
+        // new (9, "Funland Adventures", "Kids and Family", 150_000M, new DateOnly(2015, 10, 30)),
+        // new (10, "Puzzle Party", "Kids and Family", 220_450M, new DateOnly(2019, 3, 19)),
     ];
 
     public static RouteGroupBuilder MapGamesEndpoints(this WebApplication app)
@@ -37,19 +39,29 @@ public static class GameEndpoint
         }).WithName(GetGameEndpointName);
 
         // POST /games
-        group.MapPost("/", (CreateGameDto newGame) =>
+        group.MapPost("/", (CreateGameDto newGame, GameStoreContext dbContext) =>
         {
-            GameDto game = new(
-                _games.Count + 1,
-                newGame.Name,
-                newGame.Genre,
-                newGame.Price,
-                newGame.ReleaseDate
+            Game game = new()
+            {
+                Name = newGame.Name,
+                Genre = dbContext.Genres.Find(newGame.GenreId),
+                GenreId = newGame.GenreId,
+                Price = newGame.Price,
+                ReleaseDate = newGame.ReleaseDate
+            };
+
+            dbContext.Games.Add(game);
+            dbContext.SaveChanges();
+
+            GameDto gameDto = new(
+                game.Id,
+                game.Name,
+                game.Genre!.Name,
+                game.Price,
+                game.ReleaseDate
             );
 
-            _games.Add(game);
-
-            return Results.CreatedAtRoute(GetGameEndpointName, new { id = game.Id }, game);
+            return Results.CreatedAtRoute(GetGameEndpointName, new { id = game.Id }, gameDto);
         });
 
         // UPDATE games/{id}
