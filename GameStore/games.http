@@ -1,7 +1,7 @@
 GET http://localhost:5185/games
 
 ###
-GET http://localhost:5185/games/2
+GET http://localhost:5185/games/5
 
 ###
 GET http://localhost:5185/games/100
@@ -11,21 +11,21 @@ POST http://localhost:5185/games
 Content-Type: application/json
 
 {
-    "name": "Soccer Stars 2025",
-    "genreId": 3,
-    "price": 255300,
-    "releaseDate" : "2023-09-17"
+    "name": "Battle Arena X",
+    "genreId": 1,
+    "price": 142109,
+    "releaseDate" : "2018-01-08"
 }
 
 ###
-PUT http://localhost:5185/games/1
+PUT http://localhost:5185/games/7
 Content-Type: application/json
 
 {
-    "name": "The Silent Code II",
-    "genre": "Strategy",
-    "price": 149000,
-    "releaseDate": "2017-03-06"
+    "name": "Soccer Stars 2025 Update",
+    "genreId": 3,
+    "price": 255300,
+    "releaseDate": "2023-09-17"
 }
 
 ###
