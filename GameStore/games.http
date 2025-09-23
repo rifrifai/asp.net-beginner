@@ -11,10 +11,10 @@ POST http://localhost:5185/games
 Content-Type: application/json
 
 {
-    "name": "Battle Arena X",
-    "genreId": 1,
-    "price": 142109,
-    "releaseDate" : "2018-01-08"
+    "name": "Soccer Stars 2025",
+    "genreId": 3,
+    "price": 255300,
+    "releaseDate" : "2023-09-17"
 }
 
 ###
